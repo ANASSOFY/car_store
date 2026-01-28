@@ -1,3 +1,4 @@
+import 'package:car_store/widgets/button_app.dart';
 import 'package:flutter/material.dart';
 import 'create_account_screen.dart';
 
@@ -11,25 +12,8 @@ class LandingScreen extends StatelessWidget {
         children: [
           /// Background Image
           SizedBox.expand(
-            child: Image.asset(
-              'assets/images/car7.png',
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset('assets/images/carr.jpg', fit: BoxFit.cover),
           ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black.withOpacity(0.6),
-                  Colors.black.withOpacity(0.3),
-                  Colors.black.withOpacity(0.7),
-                ],
-              ),
-            ),
-          ),
-
           /// Content
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -38,73 +22,55 @@ class LandingScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// Title
-                Text(
-                  "Find Your\nPerfect Car",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    height: 1.2,
-                  ),
-                ),
-
-                const SizedBox(height: 400),
-
-                /// Subtitle
-                Text(
-                  "Your trusted marketplace for buying\nsecond-hand cars with confidence.",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white.withOpacity(0.85),
-                    height: 1.5,
-                  ),
-                ),
-
-                const SizedBox(height: 20),
-
-                /// Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => CreateAccountScreen(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orangeAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      elevation: 8,
-                    ),
-                    child: const Text(
-                      "get started",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                /// Bottom text
-                Center(
-                  child: Text(
-                    "Discover the best deals on pre-owned vehicles",
-                    textAlign: TextAlign.center,
+                Text.rich(
+                  TextSpan(
+                    text: 'Your Trusted Marketplace\nfor Second-Hand ',
                     style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white.withOpacity(0.8),
+                      fontFamily: "Montserrat",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: 'Cars\"',
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orangeAccent,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 550),
+                /// Subtitle
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Discover the Best Deals\non Pre-Owned Cars",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: "Montserrat",
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                ),
+                const SizedBox(height: 20),
+                /// Button
+                ButtonApp(
+                  title: "Get Started",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CreateAccountScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

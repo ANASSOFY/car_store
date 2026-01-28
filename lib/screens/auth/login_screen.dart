@@ -1,11 +1,13 @@
-import 'package:car_store/screens/auth/login_screen.dart';
-import 'package:car_store/widgets/gradient_container.dart';
+import 'package:car_store/screens/auth/create_account_screen.dart';
+import 'package:car_store/screens/auth/request_otp_screen.dart';
 import 'package:flutter/material.dart';
+
 import '../../widgets/button_app.dart';
+import '../../widgets/gradient_container.dart';
 import '../../widgets/text_field_app.dart';
 
-class CreateAccountScreen extends StatelessWidget {
-  const CreateAccountScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class CreateAccountScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 Text.rich(
                   TextSpan(
-                    text: 'Create an ',
+                    text: 'Welcome ',
                     style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 25,
@@ -58,7 +60,7 @@ class CreateAccountScreen extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: 'account',
+                        text: 'back',
                         style: TextStyle(
                           fontFamily: "Montserrat",
 
@@ -70,30 +72,18 @@ class CreateAccountScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
-
-                /// Subtitle
+                SizedBox(height: 80),
                 TextFieldApp(
-                  title: "Email Address",
-                  hintText: "Enter your email",
-                ),
-                SizedBox(height: 20),
-                TextFieldApp(
-                  title: "Mobile Number",
-                  hintText: "Enter your mobile no",
-                ),
-                SizedBox(height: 20),
-                TextFieldApp(
-                  title: "Password",
-                  hintText: "Enter your password",
+                  title: "Enter your Mobile no",
+                  hintText: "Enter  phone no",
                 ),
                 SizedBox(height: 20),
                 ButtonApp(
-                  title: "Create an account",
+                  title: "Get otp",
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => CreateAccountScreen()),
+                      MaterialPageRoute(builder: (_) => RequestOtpScreen()),
                     );
                   },
                 ),
@@ -102,7 +92,7 @@ class CreateAccountScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Already have an account ",
+                      "Create a new ",
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 20,
@@ -113,10 +103,12 @@ class CreateAccountScreen extends StatelessWidget {
                     InkWell(
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => CreateAccountScreen(),
+                        ),
                       ),
                       child: Text(
-                        "Login",
+                        "account",
                         style: TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: 25,
@@ -126,6 +118,54 @@ class CreateAccountScreen extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(height: 40),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Or",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Montserrat",
+                    ),
+                  ),
+                ),
+                SizedBox(height: 50),
+
+                Container(
+                  height: 56,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: Colors.white),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sign up with",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Montserrat",
+                        ),
+                      ),
+                      SizedBox(width: 30),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Image.asset("assets/images/Logo-google.png"),
+                      ),
+                      SizedBox(width: 15),
+                      VerticalDivider(),
+                      SizedBox(width: 15),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Image.asset("assets/images/apple-logo.png"),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
