@@ -1,6 +1,9 @@
 import 'package:car_store/widgets/cards/brand_card.dart';
 import 'package:car_store/widgets/cards/suggestion_card.dart';
+import 'package:car_store/widgets/custom_button_navigation_bar.dart';
+import 'package:car_store/widgets/row_text_and_button.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/custom_search_bar.dart';
 
 class SelectCarBrandScreen extends StatelessWidget {
   const SelectCarBrandScreen({super.key});
@@ -46,42 +49,13 @@ class SelectCarBrandScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20),
 
-            TextField(
-              decoration: InputDecoration(
-                suffixIcon: Icon(Icons.search),
-                hintText: "Search Cars...",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-              ),
-            ),
+            CustomSearchBar(),
             SizedBox(height: 30),
-            Row(
-              children: [
-                Text(
-                  "Select your car brand",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Spacer(),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    backgroundColor: Colors.orangeAccent,
-                  ),
-                  child: Text(
-                    "Switch to Sell",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
+            RowTextAndButton(
+              text: "Select your car brand",
+              buttonTitle: "Switch to Sell",
             ),
+
             SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
@@ -121,6 +95,7 @@ class SelectCarBrandScreen extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: CustomButtonNavigationBar(),
     );
   }
 }

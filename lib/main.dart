@@ -1,5 +1,3 @@
-import 'package:car_store/screens/auth/verify_otp_screen.dart';
-import 'package:car_store/screens/buy/select_car_brand_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/auth/landing_screen.dart';
 
@@ -8,11 +6,13 @@ void main() {
 }
 
 class CarStoreAuthApp extends StatelessWidget {
+  const CarStoreAuthApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SelectCarBrandScreen(),
+      home: LandingScreen(),
     );
   }
 }
