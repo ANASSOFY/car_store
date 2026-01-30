@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:car_store/screens/buy/select_car_brand_screen.dart';
 import 'package:car_store/widgets/cards/car_card.dart' hide CarCard;
 import 'package:flutter/material.dart';
@@ -25,10 +26,29 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           _controllers.every((controller) => controller.text.isNotEmpty);
     });
   }
+=======
+import 'package:car_store/screens/auth/login_screen.dart';
+import 'package:car_store/widgets/button_app.dart';
+import 'package:car_store/widgets/custom_app_bar.dart';
+import 'package:car_store/widgets/custom_text_with_click.dart';
+import 'package:car_store/widgets/otp_num.dart';
+import 'package:flutter/material.dart';
+import '../../widgets/gradient_container.dart';
+import '../profile/profile_screen.dart';
+
+class VerifyOtpScreen extends StatelessWidget {
+  final String name;
+  final String email;
+  final String phone;
+  final String role;
+
+  const VerifyOtpScreen({super.key, required this.name, required this.email, required this.phone, required this.role, });
+>>>>>>> 9e39861 (profile screen)
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
@@ -50,11 +70,15 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           ),
         ],
       ),
+=======
+      appBar:CustomAppBar(),
+>>>>>>> 9e39861 (profile screen)
       body: Stack(
         children: [
           SizedBox.expand(
             child: Image.asset('assets/images/carr.jpg', fit: BoxFit.cover),
           ),
+<<<<<<< HEAD
           const GradientContainer(),
           SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -66,6 +90,18 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   alignment: Alignment.topLeft,
                   child: Text(
                     "OTP Verification",
+=======
+          GradientContainer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                SizedBox(height: 50),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Otp",
+>>>>>>> 9e39861 (profile screen)
                     style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 25,
@@ -74,6 +110,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                     ),
                   ),
                 ),
+<<<<<<< HEAD
                 const SizedBox(height: 10),
                 const Text(
                   "We have sent the verification code to your mobile number",
@@ -137,6 +174,50 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       color: Colors.orangeAccent,
                       fontWeight: FontWeight.bold),
                 ),
+=======
+                SizedBox(height: 10),
+                Text(
+                  "We have sent the code verification to $phone",
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff807E7E),
+                  ),
+                ),
+                SizedBox(height: 20,),
+                OtpNum(),
+                SizedBox(height: 60,),
+                ButtonApp(
+                  title: "Verify",
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(
+                          name: name,
+                          email: email,
+                          phone: phone,
+                          role: role,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                SizedBox(height: 60,),
+                Text(
+                  "00:34",
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff807E7E),
+                  ),
+                ),
+                SizedBox(height: 60),
+                CustomTextWithClick(text1: "Don't receive code? ", text2: "request again"),
+>>>>>>> 9e39861 (profile screen)
               ],
             ),
           ),
