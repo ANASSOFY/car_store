@@ -1,170 +1,197 @@
-import 'package:car_store/widgets/cards/brand_card.dart';
-import 'package:car_store/widgets/cards/suggestion_card.dart';
 import 'package:flutter/material.dart';
-import 'car_details_screen.dart';
+import 'car_list_screen.dart';
 
 class SelectCarBrandScreen extends StatelessWidget {
   const SelectCarBrandScreen({super.key});
 
+  static const List<String> brandImages = [
+    "assets/images/hyundai.png",
+    "assets/images/tata.png",
+    "assets/images/honda.png",
+    "assets/images/bmw.png",
+    "assets/images/audi.png",
+    "assets/images/toyota.png",
+  ];
+
+  static const List<String> brandNames = [
+    "Hyundai",
+    "Tata",
+    "Honda",
+    "BMW",
+    "Audi",
+    "Toyota",
+  ];
+  static const
+ List<String> suggestionImages = const [
+    "assets/images/redcar.jpg",
+    "assets/images/testcar.jpg",
+    "assets/images/driving.jpg",
+  ];
+
   @override
   Widget build(BuildContext context) {
-    List<String> brandImages = [
-      "assets/images/hyundai.png",
-      "assets/images/tata.png",
-      "assets/images/honda.png",
-      "assets/images/bmw.png",
-      "assets/images/audi.png",
-      "assets/images/toyota.png",
-    ];
-    List<String> suggestionImages = [
-      "assets/images/redcar.jpg",
-      "assets/images/testcar.jpg",
-      "assets/images/driving.jpg",
-    ];
-
-    List<String> brandNames = [
-      "Hyundai",
-      "Tata",
-      "Honda",
-      "BMW",
-      "Audi",
-      "Toyota",
-    ];
-
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
         ),
+        title: const Text("Select Car Brand", style: TextStyle(color: Colors.black)),
         actions: const [
-          Icon(Icons.notifications_none_outlined,
-              color: Colors.black, size: 30),
-          SizedBox(width: 20),
-          Icon(Icons.info_outline_rounded, color: Colors.black, size: 30),
-          SizedBox(width: 20),
-          Icon(Icons.person, color: Colors.black, size: 30),
+          Icon(Icons.notifications_none_outlined, color: Colors.black, size: 28),
           SizedBox(width: 16),
+          Icon(Icons.info_outline_rounded, color: Colors.black, size: 28),
+          SizedBox(width: 16),
+          Icon(Icons.person, color: Colors.black, size: 28),
+          SizedBox(width: 12),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const SizedBox(height: 20),
-
-            /// Search Field
+            /// Search Bar
             Container(
-              height: 55,
+              height: 50,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: TextField(
-                style: const TextStyle(color: Colors.black),
+              child: const TextField(
                 decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.search, color: Colors.black54),
                   hintText: "Search Cars...",
-                  hintStyle: TextStyle(color: Colors.black54.withOpacity(0.7)),
+                  prefixIcon: Icon(Icons.search, color: Colors.black54),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                  contentPadding: EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
             ),
-
-            const SizedBox(height: 30),
-
-            /// Header + Switch Button
-            Row(
-              children: [
-                const Text(
-                  "Select your car brand",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    backgroundColor: Colors.orangeAccent,
-                  ),
-                  child: const Text(
-                    "Switch to Sell",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-
             const SizedBox(height: 20),
 
-            /// GridView للبراندات
+            /// Grid of Brands
             Expanded(
-              flex: 1,
               child: GridView.builder(
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                itemCount: brandImages.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
                   childAspectRatio: 1.2,
                 ),
-                itemCount: brandImages.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => CarDetailScreen(
-                            carImage: brandImages[index],
-                            brandName: brandNames[index],
-                            carImages: brandImages,
-                          ),
+                          builder: (_) => CarListScreen(brandName: brandNames[index]),
                         ),
                       );
                     },
-                    child: BrandCard(image: brandImages[index]),
+                    child: Card(
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Image.asset(
+                          brandImages[index],
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),
             ),
+             const SizedBox(height: 0.2),
 
-            const SizedBox(height: 20),
+           // Title
+Align(
+  alignment: Alignment.centerLeft,
+  child: Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Text(
+      "Buy in 3 easy steps",
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
+    ),
+  ),
+),
 
-            /// Suggestions
-            Align(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "Buy in 3 easy steps",
-                style: TextStyle(
-                  fontSize: 15,
+// Steps List
+ListView.separated(
+  shrinkWrap: true,
+  physics: const NeverScrollableScrollPhysics(),
+  itemCount: 3,
+  separatorBuilder: (_, __) => const SizedBox(height: 12),
+  itemBuilder: (context, index) {
+    final steps = [
+      {
+        "title": "Choose Your Car",
+        "desc":
+            "Browse cars from top brands and choose the one that fits your needs.",
+      },
+      {
+        "title": "Schedule Test Drive",
+        "desc":
+            "Pick a date and time to experience the car before buying.",
+      },
+      {
+        "title": "Complete Purchase",
+        "desc":
+            "Finish the process easily with secure payment options.",
+      },
+    ];
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        /// Image
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(
+            suggestionImages[index],
+            width: 70,
+            height: 70,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(width: 12),
+
+        /// Text
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Step ${index + 1}: ${steps[index]['title']}",
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontFamily: "Montserrat",
+                  fontSize: 14,
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-
-            Expanded(
-              flex: 1,
-              child: ListView.builder(
-                itemCount: suggestionImages.length,
-                itemBuilder: (context, index) {
-                  return SuggestionCard(image: suggestionImages[index]);
-                },
+              const SizedBox(height: 6),
+              Text(
+                steps[index]['desc']!,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
               ),
-            ),
+            ],
+          ),
+        ),
+      ],
+    );
+  },
+),
+
+          
           ],
         ),
       ),

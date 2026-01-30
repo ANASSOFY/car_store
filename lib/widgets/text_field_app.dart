@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/services/text_formatter.dart';
 
 class TextFieldApp extends StatelessWidget {
   final String title;
   final String hintText;
-  const TextFieldApp({super.key, required this.title, required this.hintText});
+  const TextFieldApp({super.key, required this.title, required this.hintText, required TextInputType keyboardType, required bool obscureText, required List<TextInputFormatter> inputFormatters});
 
   @override
   Widget build(BuildContext context) {

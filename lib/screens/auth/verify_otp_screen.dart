@@ -1,26 +1,10 @@
-import 'package:car_store/widgets/button_app.dart';
+import 'package:car_store/screens/buy/select_car_brand_screen.dart';
+import 'package:car_store/widgets/cards/car_card.dart' hide CarCard;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import '../../widgets/button_app.dart';
+import '../../widgets/gradient_container.dart';
 
-class GradientContainer extends StatelessWidget {
-  const GradientContainer({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.black.withOpacity(0.5),
-            Colors.black.withOpacity(0.8),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class VerifyOtpScreen extends StatefulWidget {
   const VerifyOtpScreen({super.key});
@@ -47,7 +31,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "Hello!",
           style: TextStyle(
             fontFamily: "Montserrat",
@@ -61,7 +45,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
         actions: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28),
+            icon: const Icon(Icons.arrow_back_ios_new,
+                color: Colors.white, size: 28),
           ),
         ],
       ),
@@ -70,16 +55,17 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           SizedBox.expand(
             child: Image.asset('assets/images/carr.jpg', fit: BoxFit.cover),
           ),
-          GradientContainer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+          const GradientContainer(),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 50),
-                Align(
+                const SizedBox(height: 20),
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Otp",
+                    "OTP Verification",
                     style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 25,
@@ -88,90 +74,69 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                Text(
-                  "We have sent the code verification to your mobile no",
+                const SizedBox(height: 10),
+                const Text(
+                  "We have sent the verification code to your mobile number",
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white70,
                   ),
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 30,
-                  children:List.generate(4, (index)=>SizedBox(
-                    height: 60,
-                    width: 66,
-                    child: TextField(
-                      maxLength: 1,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-
-                      decoration: InputDecoration(
-                        counterText: "",
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.3),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white),
+                  children: List.generate(
+                    4,
+                    (index) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: TextField(
+                          controller: _controllers[index],
+                          maxLength: 1,
+                          onChanged: (_) => _checkOtp(),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          decoration: InputDecoration(
+                            counterText: "",
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.3),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),)
-                ),
-                SizedBox(height: 60,),
-                ButtonApp(title: "Verify", onPressed: (){},),
-                SizedBox(height: 60,),
-                Text(
-                  "00:34",
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff807E7E),
                   ),
                 ),
-                SizedBox(height: 60),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't receive code? ",
-                      style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        "request again",
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orangeAccent,
-                        ),
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 30),
+                ButtonApp(
+                  title: "Verify & Continue",
+                  onPressed: isOtpComplete
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const SelectCarBrandScreen()),
+                          );
+                        }
+                      : null,
                 ),
-
+                const SizedBox(height: 20),
+                const Text(
+                  "Didn't receive code? Request again",
+                  style: TextStyle(
+                      color: Colors.orangeAccent,
+                      fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),

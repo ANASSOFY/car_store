@@ -1,12 +1,9 @@
-import 'package:car_store/screens/auth/login_screen.dart';
-import 'package:car_store/screens/buy/select_car_brand_screen.dart';
-import 'package:car_store/widgets/custom_app_bar.dart';
-import 'package:car_store/widgets/custom_text_rich.dart';
-import 'package:car_store/widgets/custom_text_with_click.dart';
-import 'package:car_store/widgets/gradient_container.dart';
 import 'package:flutter/material.dart';
+import 'login_screen.dart';
 import '../../widgets/button_app.dart';
 import '../../widgets/text_field_app.dart';
+import '../../widgets/gradient_container.dart';
+import '../../widgets/custom_text_rich.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});
@@ -18,7 +15,7 @@ class CreateAccountScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "Hello!",
           style: TextStyle(
             fontFamily: "Montserrat",
@@ -32,88 +29,72 @@ class CreateAccountScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28),
+            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28),
           ),
         ],
       ),
       body: Stack(
         children: [
           SizedBox.expand(
-            child: Image.asset(
-              'assets/images/carr.jpg',
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset('assets/images/carr.jpg', fit: BoxFit.cover),
           ),
-          GradientContainer(),
+          const GradientContainer(),
 
-          /// Content
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
             child: Column(
-              spacing: 16,
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
-                Text.rich(
-                  TextSpan(
-                    text: 'Create an ',
-                    style: TextStyle(
-                      fontFamily: "Montserrat",
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'account',
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
+                const CustomTextRich(text1: "Create an ", text2: "account"),
+                const SizedBox(height: 20),
 
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orangeAccent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                /// Subtitle
-                TextFieldApp(
+                const TextFieldApp(
                   title: "Email Address",
                   hintText: "Enter your email",
+                  keyboardType: TextInputType.emailAddress,
+                  obscureText: false,
+                  inputFormatters: [],
                 ),
-                SizedBox(height: 20),
-                TextFieldApp(
+                const SizedBox(height: 20),
+
+                const TextFieldApp(
                   title: "Mobile Number",
                   hintText: "Enter your mobile no",
+                  keyboardType: TextInputType.phone,
+                  obscureText: false,
+                  inputFormatters: [],
                 ),
-                SizedBox(height: 20),
-                TextFieldApp(
+                const SizedBox(height: 20),
+
+                const TextFieldApp(
                   title: "Password",
                   hintText: "Enter your password",
+                  keyboardType: TextInputType.text,
+                  obscureText: true,
+                  inputFormatters: [],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 32),
+
                 ButtonApp(
                   title: "Create an account",
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => CreateAccountScreen()),
+                      MaterialPageRoute(builder: (_) => const LoginScreen()),
                     );
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 24),
+
+                // Login Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Already have an account ",
                       style: TextStyle(
                         fontFamily: "Montserrat",
-                        fontSize: 20,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -121,13 +102,13 @@ class CreateAccountScreen extends StatelessWidget {
                     InkWell(
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(builder: (_) => const LoginScreen()),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Login",
                         style: TextStyle(
                           fontFamily: "Montserrat",
-                          fontSize: 25,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.orangeAccent,
                         ),
@@ -135,6 +116,7 @@ class CreateAccountScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 40),
               ],
             ),
           ),
