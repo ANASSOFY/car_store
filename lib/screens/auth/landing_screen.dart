@@ -8,52 +8,76 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Stack(
         children: [
           SizedBox.expand(
-            child: Image.asset('assets/images/carr.jpg', fit: BoxFit.cover),
+            child: Image.asset(
+              'assets/images/carr.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
-          SingleChildScrollView(
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextRich(
-                      text1: "Your Trusted Marketplace\nfor Second-Hand ",
-                      text2: "Cars\"",
+          /// Content
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// Title
+                Text.rich(
+                  TextSpan(
+                    text: 'Your Trusted Marketplace\nfor Second-Hand ',
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * .65),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Discover the Best Deals\non Pre-Owned Cars",
+                    children: [
+                      TextSpan(
+                        text: 'Cars\"',
                         style: TextStyle(
-                          fontSize: 20,
                           fontFamily: "Montserrat",
-                          color: Colors.white,
+
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
+                          color: Colors.orangeAccent,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    ButtonApp(
-                      title: "Get Started",
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateAccountScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 550),
+                /// Subtitle
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Discover the Best Deals\non Pre-Owned Cars",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: "Montserrat",
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                /// Button
+                ButtonApp(
+                  title: "Get Started",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CreateAccountScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ],

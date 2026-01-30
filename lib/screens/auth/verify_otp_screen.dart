@@ -1,18 +1,70 @@
-import 'package:car_store/screens/auth/login_screen.dart';
 import 'package:car_store/widgets/button_app.dart';
-import 'package:car_store/widgets/custom_app_bar.dart';
-import 'package:car_store/widgets/custom_text_with_click.dart';
-import 'package:car_store/widgets/otp_num.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/gradient_container.dart';
+import 'package:flutter/services.dart';
 
-class VerifyOtpScreen extends StatelessWidget {
+class GradientContainer extends StatelessWidget {
+  const GradientContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.black.withOpacity(0.5),
+            Colors.black.withOpacity(0.8),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VerifyOtpScreen extends StatefulWidget {
   const VerifyOtpScreen({super.key});
+
+  @override
+  State<VerifyOtpScreen> createState() => _VerifyOtpScreenState();
+}
+
+class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
+  final List<TextEditingController> _controllers =
+      List.generate(4, (_) => TextEditingController());
+
+  bool isOtpComplete = false;
+
+  void _checkOtp() {
+    setState(() {
+      isOtpComplete =
+          _controllers.every((controller) => controller.text.isNotEmpty);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:CustomAppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Hello!",
+          style: TextStyle(
+            fontFamily: "Montserrat",
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           SizedBox.expand(
@@ -40,16 +92,48 @@ class VerifyOtpScreen extends StatelessWidget {
                 Text(
                   "We have sent the code verification to your mobile no",
                   style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 15,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xff807E7E),
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(height: 20,),
-                OtpNum(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 30,
+                  children:List.generate(4, (index)=>SizedBox(
+                    height: 60,
+                    width: 66,
+                    child: TextField(
+                      maxLength: 1,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+
+                      decoration: InputDecoration(
+                        counterText: "",
+                        filled: true,
+                        fillColor: Colors.white.withOpacity(0.3),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),)
+                ),
                 SizedBox(height: 60,),
-                ButtonApp(title: "Verify", onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (builder)=>LoginScreen()));},),
+                ButtonApp(title: "Verify", onPressed: (){},),
                 SizedBox(height: 60,),
                 Text(
                   "00:34",
@@ -61,7 +145,33 @@ class VerifyOtpScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 60),
-                CustomTextWithClick(text1: "Don't receive code? ", text2: "request again"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't receive code? ",
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        "request again",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orangeAccent,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
               ],
             ),
           ),

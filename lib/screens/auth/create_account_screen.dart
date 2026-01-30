@@ -13,62 +13,129 @@ class CreateAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Hello!",
+          style: TextStyle(
+            fontFamily: "Montserrat",
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           SizedBox.expand(
-            child: Image.asset('assets/images/carr.jpg', fit: BoxFit.cover),
+            child: Image.asset(
+              'assets/images/carr.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
           GradientContainer(),
+
+          /// Content
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 16,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10),
-                  CustomTextRich(text1: "Create an ", text2: "account"),
-                  SizedBox(height: 20),
-                  TextFieldApp(
-                    title: "Email Address",
-                    hintText: "Enter your email",
-                  ),
-                  SizedBox(height: 20),
-                  TextFieldApp(
-                    title: "Mobile Number",
-                    hintText: "Enter your mobile no",
-                  ),
-                  SizedBox(height: 20),
-                  TextFieldApp(
-                    title: "Password",
-                    hintText: "Enter your password",
-                  ),
-                  SizedBox(height: 20),
-                  ButtonApp(
-                    title: "Create an account",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SelectCarBrandScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  CustomTextWithClick(
-                    text1: "Already have an account ",
-                    text2: "Login",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+            child: Column(
+              spacing: 16,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10),
+                Text.rich(
+                  TextSpan(
+                    text: 'Create an ',
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
+                    children: [
+                      TextSpan(
+                        text: 'account',
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orangeAccent,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 20),
+
+                /// Subtitle
+                TextFieldApp(
+                  title: "Email Address",
+                  hintText: "Enter your email",
+                ),
+                SizedBox(height: 20),
+                TextFieldApp(
+                  title: "Mobile Number",
+                  hintText: "Enter your mobile no",
+                ),
+                SizedBox(height: 20),
+                TextFieldApp(
+                  title: "Password",
+                  hintText: "Enter your password",
+                ),
+                SizedBox(height: 20),
+                ButtonApp(
+                  title: "Create an account",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => CreateAccountScreen()),
+                    );
+                  },
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account ",
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      ),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orangeAccent,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
